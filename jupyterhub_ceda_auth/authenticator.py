@@ -13,7 +13,6 @@ from tornado.auth import OAuth2Mixin
 from tornado.httpclient import HTTPRequest, AsyncHTTPClient
 
 from jupyterhub.auth import LocalAuthenticator
-from jupyterhub.utils import url_path_join
 
 from oauthenticator.oauth2 import OAuthLoginHandler, OAuthCallbackHandler, OAuthenticator
 
@@ -35,9 +34,6 @@ class CedaLoginHandler(OAuthLoginHandler, CedaOAuth2Mixin):
 class CedaOAuthenticator(OAuthenticator, CedaOAuth2Mixin):
     login_service = 'CEDA'
     login_handler = CedaLoginHandler
-
-    def login_url(self, base_url):
-        return url_path_join(base_url, 'login')
 
     @gen.coroutine
     def authenticate(self, handler, data = None):
