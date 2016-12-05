@@ -35,6 +35,9 @@ class CedaOAuthenticator(OAuthenticator, CedaOAuth2Mixin):
     login_service = 'CEDA'
     login_handler = CedaLoginHandler
 
+    def login_url(self, base_url):
+        return url_path_join(base_url, 'login')
+
     @gen.coroutine
     def authenticate(self, handler, data = None):
         code = handler.get_argument("code", False)
