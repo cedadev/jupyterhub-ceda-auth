@@ -69,4 +69,4 @@ class CedaOAuthenticator(OAuthenticator, CedaOAuth2Mixin):
         )
         resp = yield http_client.fetch(req)
         resp_json = json.loads(resp.body.decode('utf8', 'replace'))
-        return resp_json.get.get('profile', {}).get('accountid')
+        return resp_json.get('profile', {}).get('accountid')
