@@ -13,6 +13,7 @@ from tornado.auth import OAuth2Mixin
 from tornado.httpclient import HTTPRequest, AsyncHTTPClient
 
 from jupyterhub.auth import LocalAuthenticator
+from jupyterhub.utils import url_path_join
 
 from oauthenticator.oauth2 import OAuthLoginHandler, OAuthCallbackHandler, OAuthenticator
 
