@@ -12,6 +12,8 @@ from tornado import gen, web
 from tornado.auth import OAuth2Mixin
 from tornado.httpclient import HTTPRequest, AsyncHTTPClient
 
+from jupyterhub.auth import LocalAuthenticator
+
 from oauthenticator.oauth2 import OAuthLoginHandler, OAuthCallbackHandler, OAuthenticator
 
 
@@ -70,3 +72,8 @@ class CedaOAuthenticator(OAuthenticator, CedaOAuth2Mixin):
         resp = yield http_client.fetch(req)
         resp_json = json.loads(resp.body.decode('utf8', 'replace'))
         return resp_json.get('profile', {}).get('accountid')
+
+
+class LocalCedaOAuthenticator(LocalAuthenticator, CedaOAuthenticator):
+    """A version that mixes in local system user creation"""
+    pass
