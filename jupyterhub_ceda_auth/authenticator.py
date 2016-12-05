@@ -60,9 +60,12 @@ class CedaOAuthenticator(OAuthenticator, CedaOAuth2Mixin):
 
         # Determine who the logged in user is
         req = HTTPRequest(
-            "{}/oauth/profile/?access_token={}".format(CEDA_OAUTH_HOST, access_token),
+            "{}/oauth/profile/".format(CEDA_OAUTH_HOST),
             method = "GET",
-            headers = { "Accept" : "application/json" }
+            headers = {
+                "Accept" : "application/json",
+                "Bearer" : access_token,
+            }
         )
         resp = yield http_client.fetch(req)
         resp_json = json.loads(resp.body.decode('utf8', 'replace'))
