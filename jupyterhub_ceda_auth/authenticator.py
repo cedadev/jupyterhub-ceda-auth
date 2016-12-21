@@ -44,7 +44,7 @@ class CedaOAuthenticator(OAuthenticator, CedaOAuth2Mixin):
 
     custom_html = Markup("""
     <div class="service-login">
-      <a class='btn btn-jupyter btn-lg' href='/hub/oauth_login'>
+      <a class="btn btn-jupyter btn-lg" href="/hub/oauth_login">
         Sign in with CEDA
       </a>
     </div>
