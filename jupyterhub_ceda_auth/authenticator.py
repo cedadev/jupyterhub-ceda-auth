@@ -38,6 +38,21 @@ class CedaOAuthenticator(OAuthenticator, CedaOAuth2Mixin):
     login_service = 'CEDA'
     login_handler = CedaLoginHandler
 
+    # In JupyterHub 0.7.0, visiting /hub redirects straight to /hub/oauth_login,
+    # which redirects straight to CEDA. We want to show a 'Sign in with CEDA'
+    # button, so we hack it
+
+    custom_html = Markup("""
+    <div class="service-login">
+      <a class="btn btn-jupyter btn-lg" href="/hub/oauth_login">
+        Sign in with CEDA
+      </a>
+    </div>
+    """)
+
+    def login_url(self, base_url):
+        return url_path_join(base_url, 'login')
+
     @gen.coroutine
     def authenticate(self, handler, data = None):
         code = handler.get_argument("code", False)
